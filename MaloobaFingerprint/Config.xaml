@@ -1,0 +1,47 @@
+﻿<Window x:Class="XamlFingerprintAnalyser.Config"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XamlFingerprintAnalyser"
+        mc:Ignorable="d"
+        Title="Config"
+        SizeToContent="WidthAndHeight">
+
+    <Window.Resources>
+        <ControlTemplate x:Key="ErrorText">
+            <StackPanel>
+                <AdornedElementPlaceholder x:Name="elem"/>
+                <TextBlock Text="{Binding ElementName=elem, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" Foreground="Red"/>
+            </StackPanel>
+        </ControlTemplate>
+        <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:XamlFingerprintAnalyser.ViewModel"/>
+    </Window.Resources>
+
+    <Grid x:Name="Grid" VerticalAlignment="Top" DataContext="{Binding Path=Configuration, Source={StaticResource Locator}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="LabelDevices" Grid.Row="0" Grid.Column="0" Content="Decklink Device" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+        <Label x:Name="LabelVideoMode" Grid.Row="1" Grid.Column="0" Content="Video Mode" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+        <Label x:Name="LabelTimecodeMode" Grid.Row="2" Grid.Column="0" Content="Timecode Mode" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+        <Label x:Name="LabelHost" Grid.Row="3" Grid.Column="0"  Content="Host" HorizontalAlignment="Left"  VerticalAlignment="Top" />
+        <Label x:Name="LabelPort" Grid.Row="4" Grid.Column="0"  Content="Port" HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+        <ComboBox x:Name="Devices" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Devices}" SelectedItem="{Binding Device, ValidatesOnDataErrors=True}"  DisplayMemberPath="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" IsReadOnly="True" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}"/>
+        <ComboBox x:Name="VideoMode" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding VideoModes}" SelectedItem="{Binding VideoMode}"  DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="0,0,0,20" VerticalAlignment="Top" Width="170" IsReadOnly="True" SelectedIndex="0"/>
+        <ComboBox x:Name="TimecodeMode" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding TimecodeModes}" SelectedItem="{Binding TimecodeMode}"  DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="0,0,0,20" VerticalAlignment="Top" Width="170" IsReadOnly="True" SelectedIndex="0"/>
+        <TextBox x:Name="Host" Grid.Row="3" Grid.Column="1" Text="{Binding Path=Host, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
+        <TextBox x:Name="Port" Grid.Row="4" Grid.Column="1" Text="{Binding Path=Port, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"   HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}"/>
+        <Button x:Name="Ok" Grid.Row="5" Grid.Column="1" Command="{Binding OkCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Content="OK" HorizontalAlignment="Right"  VerticalAlignment="Top" Width="75" IsDefault="True"/>
+    </Grid>
+</Window>
