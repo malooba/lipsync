@@ -11,11 +11,14 @@ namespace MaloobaLipSync.Correlator
         public const int CHANNELS = 8;
 
         public EventHandler<Shift> OutputCreated;
-        private CorrelatorConfig config;
+        private readonly CorrelatorConfig config;
         private readonly IPEndPoint inputA;
         private readonly IPEndPoint inputB;
-        private readonly double[] buffer;
-        private int needleOffset;
+        private readonly double[] medianBuffer;
+
+        // Needle offset is the offset from the start of the haystack to the start of the needle
+        // when aligned with zero delay
+        private readonly int needleOffset;
 
 
         private SyncZip<Fingerprint, Tuple<Fingerprint, Fingerprint>> pairs;
@@ -27,7 +30,7 @@ namespace MaloobaLipSync.Correlator
             this.config = config;
             inputA = new IPEndPoint(IPAddress.Parse(config.HostA), ushort.Parse(config.PortA));
             inputB = new IPEndPoint(IPAddress.Parse(config.HostB), ushort.Parse(config.PortB));
-            buffer = new double[config.CleanupFrames];
+            medianBuffer = new double[config.CleanupFrames];
             needleOffset = (config.HaystackFrames - config.NeedleFrames) >> 1;
         }
 
@@ -93,7 +96,7 @@ namespace MaloobaLipSync.Correlator
         }
 
         /// <summary>
-        /// Median filter output shifts
+        /// Median filter output shifts and select the appropriate confidence value
         /// </summary>
         /// <param name="shiftBlock"></param>
         /// <returns></returns>
@@ -109,9 +112,9 @@ namespace MaloobaLipSync.Correlator
                 if(double.IsNaN(shiftBlock[0].Delay[ch]))
                     continue;
                 for(var j = 0; j < config.CleanupFrames; j++)
-                    buffer[j] = shiftBlock[j].Delay[ch];
-                Array.Sort(buffer);
-                shift.Delay[ch] = buffer[config.CleanupFrames >> 1];
+                    medianBuffer[j] = shiftBlock[j].Delay[ch];
+                Array.Sort(medianBuffer);
+                shift.Delay[ch] = medianBuffer[config.CleanupFrames >> 1];
                 if(double.IsNaN(shift.Delay[ch]))
                     continue;
                 // Select the maximum confidence in the input block with a delay matching the median delay
@@ -120,6 +123,13 @@ namespace MaloobaLipSync.Correlator
             return shift;
         }
 
+        /// <summary>
+        /// Find a single narrow peak in the correlation results and derive a confidence measure
+        /// Return int.MaxValue if there is no single narrow peak.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="confidence"></param>
+        /// <returns></returns>
         private double GetOffset(int[] result, out double confidence)
         {
             confidence = 0.0;
