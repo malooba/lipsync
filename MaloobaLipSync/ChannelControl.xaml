@@ -19,13 +19,13 @@
             <Label Content="{Binding Delay}" Foreground="{StaticResource TextColourBrush}" Grid.Column="0" FontSize="24" Margin="-5,-2,-4,-1" Width="65" HorizontalContentAlignment="Right"/>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="4*"/>
                     <RowDefinition Height="4*"/>
                 </Grid.RowDefinitions>
-                <maloobaLipSync:IndicatorLabel Content="A" IsLit="{Binding AudioPresentA}"  Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-2,-5" FontSize="8" />
-                <maloobaLipSync:IndicatorLabel Content="B" IsLit="{Binding AudioPresentB}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-2,-5" FontSize="8" />
-                <Label Content="mS" Grid.Row="2" Foreground="{StaticResource TextColourBrush}" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-2,-5" FontSize="8" />
+                <maloobaLipSync:IndicatorLabel Content="A" IsLit="{Binding AudioPresentA}"  Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-2,-6" FontSize="10.667" />
+                <maloobaLipSync:IndicatorLabel Content="B" IsLit="{Binding AudioPresentB}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-2,-6" FontSize="10.667" />
+                <Label Content="mS" Grid.Row="2" Foreground="{StaticResource TextColourBrush}" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-2,-8" FontSize="10.667" />
             </Grid>
         </Grid>
         <Label Content="{Binding Index}" Grid.Row="1" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Center" Margin="0,-5,0,0" />

@@ -6,7 +6,7 @@ namespace MaloobaFingerprint.FingerprintAnalyser
 {
     public class Analyser
     {
-        public const int CHANNELS = 16;
+        public const int CHANNELS = 8;
 
         public EventHandler<FingerprintEventArgs> FingerprintCreated;
 
@@ -27,7 +27,7 @@ namespace MaloobaFingerprint.FingerprintAnalyser
                 cb.FingerprintCreated += OnFingerprintCreated;
                 recorder.SetCallback(cb);
                 recorder.EnableVideoInput(config.VideoMode, _BMDPixelFormat.bmdFormat8BitYUV, _BMDVideoInputFlags.bmdVideoInputFlagDefault);
-                recorder.EnableAudioInput(_BMDAudioSampleRate.bmdAudioSampleRate48kHz, _BMDAudioSampleType.bmdAudioSampleType16bitInteger, 16);
+                recorder.EnableAudioInput(_BMDAudioSampleRate.bmdAudioSampleRate48kHz, _BMDAudioSampleType.bmdAudioSampleType16bitInteger, CHANNELS);
                 recorder.StartStreams();
             }
             catch(Exception ex)

@@ -62,7 +62,7 @@ namespace MaloobaLipSync.ViewModel
             OffCommand = new RelayCommand(DoOff);
             RunCommand = new RelayCommand(DoStart, () => locator.Configuration.Valid);
             Channels = new List<ChannelViewModel>();
-            for(var i = 0; i < 16; i++)
+            for(var i = 0; i < Correlator.Correlator.CHANNELS; i++)
                 Channels.Add(new ChannelViewModel(i + 1));
         }
 

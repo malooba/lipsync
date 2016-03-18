@@ -8,6 +8,8 @@ namespace MaloobaLipSync.Correlator
 {
     class Correlator
     {
+        public const int CHANNELS = 8;
+
         public EventHandler<Shift> OutputCreated;
         private CorrelatorConfig config;
         private readonly IPEndPoint inputA;

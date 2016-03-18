@@ -41,11 +41,11 @@ namespace MaloobaLipSync.Correlator
                     chans = 2;
                     break;
 
+                // This is currently the only packet size used
                 case 2 + sizeof(uint) + 8 * sizeof(ulong):
                     chans = 8;
                     break;
 
-                // This is currently the only packet size used
                 case 2 + sizeof(uint) + 16 * sizeof(ulong):
                     chans = 16;
                     break;
@@ -57,7 +57,7 @@ namespace MaloobaLipSync.Correlator
 
             AudioSize = b[1];
             Timecode = BitConverter.ToUInt32(b, 2);
-            AudioFingerprints = new ulong[16];
+            AudioFingerprints = new ulong[Correlator.CHANNELS];
             for(var i = 0; i < chans; i++)
                 AudioFingerprints[i] = BitConverter.ToUInt64(b, 2 + sizeof(uint) + i * sizeof(ulong));
         }
