@@ -13,6 +13,8 @@ namespace MaloobaFingerprint.ViewModel
         /// </summary>
         public IDeckLinkInput Device => device;
 
+        public int Channels => channels;
+
         /// <summary>
         /// Display name of device
         /// </summary>
@@ -20,18 +22,21 @@ namespace MaloobaFingerprint.ViewModel
 
         private readonly IDeckLinkInput device;
         private readonly string name;
+        private readonly int channels;
 
         /// <summary>
         /// Construct a physical Mini-recorder device
         /// </summary>
         /// <param name="d"></param>
-        public InputDevice(IDeckLink d)
+        /// <param name="channels"></param>
+        public InputDevice(IDeckLink d, int channels)
         {
             device = d as IDeckLinkInput;
             if(device == null)
                 throw new ApplicationException("Not a Decklink input device");
+            this.channels = channels;
             d.GetDisplayName(out name);
-        }
+ }
 
         /// <summary>
         /// Construct a dummy device
@@ -40,6 +45,7 @@ namespace MaloobaFingerprint.ViewModel
         public InputDevice(string name)
         {
             this.name = name;
+            channels = 8;
         }
     }
 }

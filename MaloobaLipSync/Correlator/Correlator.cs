@@ -103,6 +103,9 @@ namespace MaloobaLipSync.Correlator
 
             for(var ch = 0; ch < 16; ch++)
             {
+                shift.AudioPresentA[ch] = shiftBlock.All(s => s.AudioPresentA[ch]);
+                shift.AudioPresentB[ch] = shiftBlock.All(s => s.AudioPresentB[ch]);
+
                 if(double.IsNaN(shiftBlock[0].Delay[ch]))
                     continue;
                 for(var j = 0; j < config.CleanupFrames; j++)
@@ -111,9 +114,8 @@ namespace MaloobaLipSync.Correlator
                 shift.Delay[ch] = buffer[config.CleanupFrames >> 1];
                 if(double.IsNaN(shift.Delay[ch]))
                     continue;
+                // Select the maximum confidence in the input block with a delay matching the median delay
                 shift.Confidence[ch] = shiftBlock.Where(s => Math.Abs(s.Delay[ch] - shift.Delay[ch]) < 0.4).Select(s => s.Confidence[ch]).Max();
-                shift.AudioPresentA[ch] = shiftBlock.Any(s => s.AudioPresentA[ch]);
-                shift.AudioPresentB[ch] = shiftBlock.Any(s => s.AudioPresentB[ch]);
             }
             return shift;
         }
