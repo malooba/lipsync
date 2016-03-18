@@ -1,4 +1,4 @@
-namespace MaloobaFingerprint.Analyser
+namespace MaloobaFingerprint.FingerprintAnalyser
 {
     /// <summary>
     /// All of the storage required to fingerprint an audio channel

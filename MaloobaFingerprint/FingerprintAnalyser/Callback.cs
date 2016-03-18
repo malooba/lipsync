@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using DeckLinkAPI;
 
-namespace MaloobaFingerprint.Analyser
+namespace MaloobaFingerprint.FingerprintAnalyser
 {
     /// <summary>
     /// Callback object for Decklink Monitor card
@@ -13,7 +12,6 @@ namespace MaloobaFingerprint.Analyser
     {
         private readonly AnalyserConfig config;
 
-        private readonly IEnumerator<uint> tcg;
         public event EventHandler<FingerprintEventArgs> FingerprintCreated;
 
         private readonly Channel[] channelData;
@@ -53,14 +51,11 @@ namespace MaloobaFingerprint.Analyser
         {
             this.config = config;
 
-            tcg = new TimecodeGenerator(25).GetEnumerator();
-
             // sps is assumed to be even
             var sps = config.SamplesPerSlot; 
-            var ch = config.GetBufferChannels();
 
-            channelData = new Channel[ch];
-            for(var c = 0; c < ch; c++)
+            channelData = new Channel[Analyser.CHANNELS];
+            for(var c = 0; c < Analyser.CHANNELS; c++)
                 channelData[c] = new Channel(config);
 
             window0 = new double[sps];
@@ -98,6 +93,9 @@ namespace MaloobaFingerprint.Analyser
         /// <param name="audioPacket"></param>
         public void VideoInputFrameArrived(IDeckLinkVideoInputFrame videoFrame, IDeckLinkAudioInputPacket audioPacket)
         {
+            // The conditions under which either of these cases occur are unclear but an overstreched processor doesn't help
+            if(videoFrame == null || audioPacket == null) return;
+
             IDeckLinkTimecode timecode;
             videoFrame.GetTimecode(config.TimecodeFormat, out timecode);
 
@@ -108,26 +106,14 @@ namespace MaloobaFingerprint.Analyser
             audioPacket.GetBytes(out buffer);
             var audioFingerprints = GetAudioFingerprints(buffer);
 
-            var sums = new int[16];
-            var videoFingerprint = VideoFingerprint(videoFrame, sums);
+            var timecodeBcd = timecode?.GetBCD() ?? 0;
 
-            uint timecodeBcd;
-            if(timecode != null)
-            {
-                timecodeBcd = timecode.GetBCD();
-            }
-            else
-            {
-                tcg.MoveNext();
-                timecodeBcd = tcg.Current;
-            }
-            FingerprintCreated?.Invoke(this,
-                new FingerprintEventArgs(timecodeBcd, (byte)config.SlotsPerFrame, (ushort)videoFingerprint,
-                    audioFingerprints, sums));
+            FingerprintCreated?.Invoke(this, new FingerprintEventArgs(timecodeBcd, (byte)config.SlotsPerFrame, 0, audioFingerprints));
 
+            // The documentation suggests that neither of these are necessary
+            // BM's own code does the former
+            // Including these doesn't make anything go bang so, in for a penny...
             Marshal.ReleaseComObject(videoFrame);
-
-            // Is this one required?
             Marshal.ReleaseComObject(audioPacket);
         }
 
@@ -281,45 +267,42 @@ namespace MaloobaFingerprint.Analyser
         /// Generate an audio fingerprint for each selected input audio channel in the buffer
         /// </summary>
         /// <param name="buffer"></param>
-        /// <param name="config"></param>
         /// <returns></returns>
         private unsafe ulong[] GetAudioFingerprints(IntPtr buffer)
         {
-            var channelMask = config.AudioChannelMask;
+            var signatures = new ulong[Analyser.CHANNELS];
 
-            // Get number of channels in buffer
-            var channels = config.GetBufferChannels();
+            // window support
+            var support = config.SamplesPerSlot * 3;
 
-            var signatures = new ulong[channels];
-            
-            for(var channel = 0; channel < channels; channel++)
+            for(var channel = 0; channel < Analyser.CHANNELS; channel++)
             {
-                ulong signature = 0;
-                bool signalPresent = false;
+                var signature = 0UL;
+                var signalPresent = false;
                 var cd = channelData[channel];
-                // Skip masked channels
-                if((channelMask & 1 << channel) == 0)
-                    continue;
 
                 // Initialise sptr to the first sample for the channel
                 var sptr = (short*)(buffer) + channel;
                 var bit = 1UL << config.SlotsPerFrame;
                 for(var slot = 0; slot < config.SlotsPerFrame; slot++)
                 {
-                    var msqr = 0.0;
+                    // Sum of squares of windowed samples
+                    var ssqr = 0.0;
                     for(var i = 0; i < config.SamplesPerSlot; i++)
                     {
                         var sample = *sptr;
                         // Step to the same channel in the next sample
-                        sptr += channels;
+                        sptr += Analyser.CHANNELS;
                         var fsample = cd.Filter.Filter(sample);
                         cd.Slot2[i] = fsample * fsample;
 
-                        msqr += window0[i] * cd.Slot0[i] + window1[i] * cd.Slot1[i] + window2[i] * cd.Slot2[i];
+                        ssqr += window0[i] * cd.Slot0[i] + window1[i] * cd.Slot1[i] + window2[i] * cd.Slot2[i];
                     }
-                    var rms = Math.Sqrt(msqr / 150);
+                    signalPresent = signalPresent || (ssqr > 0);
 
-                    signalPresent = signalPresent || (msqr > 0);
+                    // Convert to logarithmic RMS
+                    // The log scaling ensures that we are working with perceived loudness
+                    var rms = signalPresent ? Math.Log10(ssqr / support) : 0.0;
 
                     // Rotate the slot buffers
                     var tmp = cd.Slot0;

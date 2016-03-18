@@ -1,4 +1,4 @@
-﻿namespace MaloobaFingerprint.Analyser
+﻿namespace MaloobaFingerprint.FingerprintAnalyser
 {
     /// <summary>
     /// 2kHz 4th order elliptic highpass filter

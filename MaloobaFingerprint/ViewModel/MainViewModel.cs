@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using MaloobaFingerprint.Analyser;
+using MaloobaFingerprint.FingerprintAnalyser;
 
 namespace MaloobaFingerprint.ViewModel
 {
@@ -91,7 +91,7 @@ namespace MaloobaFingerprint.ViewModel
         /// <summary>
         /// Fingerprint analyser
         /// </summary>
-        private Analyser.Analyser analyser;
+        private Analyser analyser;
 
         /// <summary>
         /// Correlator host address
@@ -115,7 +115,7 @@ namespace MaloobaFingerprint.ViewModel
             OffCommand = new RelayCommand(DoOff);
             RunCommand = new RelayCommand(DoStart, () => locator.Configuration.Valid);
             Channels = new List<ChannelViewModel>();
-            for(var i = 0; i < 16; i++)
+            for(var i = 0; i < Analyser.CHANNELS; i++)
                 Channels.Add(new ChannelViewModel(i));
         }
 
@@ -130,15 +130,13 @@ namespace MaloobaFingerprint.ViewModel
             running = true;
             var configuration = locator.Configuration;
 
-            AnalyserConfig analyserConfig = null;
-
+            AnalyserConfig analyserConfig;
             try
             {
-                hostAddress = new IPEndPoint(IPAddress.Parse(configuration.Host), int.Parse(configuration.Port));
+                hostAddress = new IPEndPoint(IPAddress.Parse(configuration.Host), Int32.Parse(configuration.Port));
                 analyserConfig = new AnalyserConfig
                 {
                     Recorder = configuration.Device.Device,
-                    AudioChannelMask = 0xFF,
                     FirLength = int.Parse(configuration.FirLength ?? FIR_LENGTH_DEFAULT),
                     SamplesPerSlot = configuration.VideoMode.SamplesPerSlot,
                     SlotsPerFrame = configuration.VideoMode.SlotsPerFrame,
@@ -173,7 +171,7 @@ namespace MaloobaFingerprint.ViewModel
             else
             {
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                analyser = new Analyser.Analyser(analyserConfig);
+                analyser = new Analyser(analyserConfig);
                 analyser.FingerprintCreated += FingerprintCreated;
                 analyser.Start();
             }
@@ -193,7 +191,7 @@ namespace MaloobaFingerprint.ViewModel
                 Channels[i].AudioIndicator = (ea.AudioFingerprints[i] & 0x8000000000000000UL) != 0;
         }
 
-        private readonly byte[] fp = new byte[2 + sizeof(int) + 16 * 8];
+        private readonly byte[] fp = new byte[2 + sizeof(int) + Analyser.CHANNELS * sizeof(ulong)];
 
         /// <summary>
         /// Send a fingerprint packet over UDP
@@ -201,13 +199,12 @@ namespace MaloobaFingerprint.ViewModel
         /// <param name="ea"></param>
         private void SendPacket(FingerprintEventArgs ea)
         {
-            var chans = ea.AudioFingerprints.Length;
             Array.Clear(fp, 0, fp.Length);
             fp[0] = PACKET_VERSION;
             fp[1] = ea.SlotsPerFrame;
             Array.Copy(BitConverter.GetBytes(ea.Timecode), 0, fp, 2, 4);
-            for(var ch = 0; ch < chans; ch++)
-                Array.Copy(BitConverter.GetBytes(ea.AudioFingerprints[ch]), 0, fp, 6 + ch * 8, 8);
+            for(var ch = 0; ch < ea.AudioFingerprints.Length; ch++)
+                Array.Copy(BitConverter.GetBytes(ea.AudioFingerprints[ch]), 0, fp, 2 + sizeof(int) + ch * sizeof(ulong), sizeof(ulong));
 
             client.SendTo(fp, hostAddress);
         }

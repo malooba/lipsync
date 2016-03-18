@@ -19,6 +19,10 @@ namespace MaloobaLipSync.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase, IMainViewModel
     {
+        /// <summary>
+        /// UDP packet version identifier
+        /// </summary>
+        private const int PACKET_VERSION = 1;
 
         public RelayCommand ConfigCommand { get; }
         public RelayCommand OffCommand { get; }
@@ -123,7 +127,7 @@ namespace MaloobaLipSync.ViewModel
                 ch.AudioPresentB = s.AudioPresentB[i];
                 var delay = s.Delay[i];
                 var confidence = s.Confidence[i];
-                ch.Delay = confidence >= confidenceThreshold ? ((int)(delay + 0.499)).ToString() : "  - ";
+                ch.Delay = confidence >= confidenceThreshold ? ((int)(delay + 0.499)).ToString() : "-  ";
             }
         }
 

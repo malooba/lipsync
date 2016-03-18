@@ -16,7 +16,7 @@ namespace MaloobaLipSync.ViewModel
             get { return delay; }
             set { Set(nameof(Delay), ref delay, value); }
         }
-        private string delay = "-";
+        private string delay = "-  ";
 
         public bool AudioPresentA
         {

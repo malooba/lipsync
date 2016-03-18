@@ -1,4 +1,4 @@
-﻿namespace MaloobaFingerprint.Analyser
+﻿namespace MaloobaFingerprint.FingerprintAnalyser
 {
     /// <summary>
     /// Biquad didgital filter

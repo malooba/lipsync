@@ -2,10 +2,12 @@
 using System.Windows;
 using DeckLinkAPI;
 
-namespace MaloobaFingerprint.Analyser
+namespace MaloobaFingerprint.FingerprintAnalyser
 {
-    internal class Analyser
+    public class Analyser
     {
+        public const int CHANNELS = 16;
+
         public EventHandler<FingerprintEventArgs> FingerprintCreated;
 
         private IDeckLinkInput recorder;

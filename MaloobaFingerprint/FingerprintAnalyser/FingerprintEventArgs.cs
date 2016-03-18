@@ -1,6 +1,6 @@
 using System;
 
-namespace MaloobaFingerprint.Analyser
+namespace MaloobaFingerprint.FingerprintAnalyser
 {
     /// <summary>
     /// The fingerprint event outputs the fingerprint data

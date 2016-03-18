@@ -16,7 +16,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Label Content="{Binding Delay}" Foreground="{StaticResource TextColourBrush}" Grid.Column="0" FontSize="24" Margin="-5,-2,-4,-1" />
+            <Label Content="{Binding Delay}" Foreground="{StaticResource TextColourBrush}" Grid.Column="0" FontSize="24" Margin="-5,-2,-4,-1" Width="65" HorizontalContentAlignment="Right"/>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*"/>

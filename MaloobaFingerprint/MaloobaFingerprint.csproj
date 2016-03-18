@@ -88,14 +88,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Analyser\Analyser.cs" />
-    <Compile Include="Analyser\AnalyserConfig.cs" />
-    <Compile Include="Analyser\Biquad.cs" />
-    <Compile Include="Analyser\Callback.cs" />
-    <Compile Include="Analyser\Channel.cs" />
-    <Compile Include="Analyser\FingerprintEventArgs.cs" />
-    <Compile Include="Analyser\Hpf.cs" />
-    <Compile Include="Analyser\TimecodeGenerator.cs" />
+    <Compile Include="FingerprintAnalyser\Analyser.cs" />
+    <Compile Include="FingerprintAnalyser\AnalyserConfig.cs" />
+    <Compile Include="FingerprintAnalyser\Biquad.cs" />
+    <Compile Include="FingerprintAnalyser\Callback.cs" />
+    <Compile Include="FingerprintAnalyser\Channel.cs" />
+    <Compile Include="FingerprintAnalyser\FingerprintEventArgs.cs" />
+    <Compile Include="FingerprintAnalyser\Hpf.cs" />
+    <Compile Include="FingerprintAnalyser\TimecodeGenerator.cs" />
     <Compile Include="ChannelControl.xaml.cs">
       <DependentUpon>ChannelControl.xaml</DependentUpon>
     </Compile>
