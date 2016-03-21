@@ -8,8 +8,8 @@ namespace MaloobaLipSync.Correlator
         public readonly uint Timecode;
         public readonly double[] Delay;
         public readonly double[] Confidence;
-        public bool[] AudioPresentA;
-        public bool[] AudioPresentB;
+        public readonly bool[] AudioPresentA;
+        public readonly bool[] AudioPresentB;
 
         public Shift(uint timecode)
         {

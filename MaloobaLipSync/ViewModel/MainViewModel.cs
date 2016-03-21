@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -120,7 +121,8 @@ namespace MaloobaLipSync.ViewModel
 
         private void OutputCreated(object sender, Shift s)
         {
-            for(var i = 0; i < 16; i++)
+            Timecode = TimecodeString(s.Timecode);
+            for(var i = 0; i < Correlator.Correlator.CHANNELS; i++)
             {
                 var ch = Channels[i];
                 ch.AudioPresentA = s.AudioPresentA[i];
@@ -139,6 +141,17 @@ namespace MaloobaLipSync.ViewModel
             correlator.OutputCreated -= OutputCreated;
             correlator.Stop();
             correlator = null;
+        }
+
+        /// <summary>
+        /// Convert a BCD timecode integer to a string
+        /// </summary>
+        /// <param name="tc"></param>
+        /// <returns></returns>
+        private string TimecodeString(uint tc)
+        {
+            var b = BitConverter.GetBytes(tc);
+            return $"{b[3]:X2}:{b[2]:X2}:{b[1]:X2}:{b[0]:X2}";
         }
     }
 }

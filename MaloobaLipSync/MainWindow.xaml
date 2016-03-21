@@ -66,6 +66,7 @@
             </RadioButton>
             <RadioButton x:Name="Off" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Off" Command="{Binding Main.OffCommand}" Grid.Column="4" IsChecked="{Binding Main.OffMode}" />
             <RadioButton x:Name="Run" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Run" Command="{Binding Main.RunCommand}" Grid.Column="5" />
+            <Label x:Name="label" Content="{Binding Main.Timecode}" Grid.Column="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Foreground="white"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

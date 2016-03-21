@@ -87,30 +87,38 @@ namespace FrameCorrelatorTest
             bool presentA, presentB;
             // Fingerprints for second channel have data (A5A5A5) in the unused bits of the audio fingerprint
             var fingerprints =
-                audioFingerprints.Select(a => Fingerprint.Parse($"01 28 12345612 000000{a} A5A5A5{a}")).ToList();
+                audioFingerprints.Select(a => Fingerprint.Parse($"01 28 12345612 800000{a} A5A5A5{a}")).ToList();
 
             var corr1 = AudioCorrelator.Correlate(0, fingerprints.Skip(5), 15, fingerprints, 25, out presentA, out presentB);
 
             CollectionAssert.AreEqual(expected, corr1);
+            Assert.IsTrue(presentA);
+            Assert.IsTrue(presentB);
 
             // Check that unused fingerprint bits are ignored 
             var corr2 = AudioCorrelator.Correlate(1, fingerprints.Skip(5), 15, fingerprints, 25, out presentA, out presentB);
 
             CollectionAssert.AreEqual(expected, corr2);
+            Assert.IsTrue(presentA);
+            Assert.IsTrue(presentB);
         }
 
         [TestMethod]
         public void TestEmptyMatch()
         {
             bool presentA, presentB;
-            var fingerprints = audioFingerprints.Select(a => Fingerprint.Parse($"01 28 12345612 000000{a}")).ToList();
+            var fingerprints = audioFingerprints.Select(a => Fingerprint.Parse($"01 28 12345612 800000{a}")).ToList();
             var empty = audioFingerprints.Select(a => Fingerprint.Parse($"01 28 12345612 0000000000000000")).ToList();
 
             var corr1 = AudioCorrelator.Correlate(0, empty.Skip(5), 15, fingerprints, 25, out presentA, out presentB);
             CollectionAssert.AreEqual(null, corr1);
+            Assert.IsFalse(presentA);
+            Assert.IsTrue(presentB);
 
             var corr2 = AudioCorrelator.Correlate(0, fingerprints.Skip(5), 15, empty, 25, out presentA, out presentB);
             CollectionAssert.AreEqual(null, corr2);
+            Assert.IsTrue(presentA);
+            Assert.IsFalse(presentB);
         }
     }
 }

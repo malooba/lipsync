@@ -8,9 +8,9 @@ namespace AudioFingerprintTest
     public class FilterTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ImpulseResponseTest()
         {
-            var impulse = new double[]
+            var impulseResponse = new double[]
             {
                  0.65471754919057201,
                 -0.41719110093654077,
@@ -44,7 +44,7 @@ namespace AudioFingerprintTest
             {
                 var output = g * bq2.Filter(bq1.Filter(input));
                 // This should be near enough :D
-                Assert.IsTrue(Math.Abs(output - impulse[i]) < 0.00000000000001);
+                Assert.IsTrue(Math.Abs(output - impulseResponse[i]) < 0.00000000000001);
                 input = 0.0;
             }
         }
