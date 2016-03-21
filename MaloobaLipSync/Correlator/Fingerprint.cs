@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Media.Animation;
 
 namespace MaloobaLipSync.Correlator
 {
     /// <summary>
     /// A single fingerprint record from an analyser
     /// </summary>
-    internal class Fingerprint : IComparable<Fingerprint>
+    public class Fingerprint : IComparable<Fingerprint>
     {
         /// <summary>
         /// UDP packet version identifier
@@ -16,6 +17,29 @@ namespace MaloobaLipSync.Correlator
         public readonly uint Timecode;                       // BCD timecode
         public readonly int AudioSize;                       // Number of bits in each audio fingerprint 0-48
         public readonly ulong[] AudioFingerprints;           // Audio fingerprints
+
+        /// <summary>
+        /// Read a fingerprint from text (e.g. a line in a text file)
+        /// The input fields are converted to a byte array to simulate an incoming UDP packet
+        /// This approach means it is valid to test fingerprint creation using this method
+        /// </summary>
+        /// <param name="line"></param>
+        public static Fingerprint Parse(string line)
+        {
+            var fields = line.Split(' ');
+            var version = Convert.ToByte(fields[0], 16);
+            var audioSize = Convert.ToByte(fields[1], 16);
+            var timecode = Convert.ToUInt32(fields[2], 16);
+            var audioFingerprints = fields.Skip(3).SelectMany(f => BitConverter.GetBytes(Convert.ToUInt64(f, 16))).ToArray();
+
+            var bytes = new byte[audioFingerprints.Length + 6];
+            bytes[0] = version;
+            bytes[1] = audioSize;
+            BitConverter.GetBytes(timecode).CopyTo(bytes, 2);
+            audioFingerprints.CopyTo(bytes, 6);
+
+            return new Fingerprint(bytes);
+        }
 
         /// <summary>
         /// Read a fingerprint from a byte array (e.g. a UDP packet)

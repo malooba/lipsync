@@ -104,7 +104,7 @@ namespace MaloobaFingerprint.FingerprintAnalyser
 
             IntPtr buffer;
             audioPacket.GetBytes(out buffer);
-            var audioFingerprints = GetAudioFingerprints(buffer);
+            var audioFingerprints = GetAudioFingerprints(buffer, config);
 
             var timecodeBcd = timecode?.GetBCD() ?? 0;
 
@@ -268,7 +268,7 @@ namespace MaloobaFingerprint.FingerprintAnalyser
         /// </summary>
         /// <param name="buffer"></param>
         /// <returns></returns>
-        private unsafe ulong[] GetAudioFingerprints(IntPtr buffer)
+        internal unsafe ulong[] GetAudioFingerprints(IntPtr buffer, AnalyserConfig config)
         {
             var signatures = new ulong[Analyser.CHANNELS];
 

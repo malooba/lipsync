@@ -72,6 +72,11 @@ namespace MaloobaLipSync.Correlator
             task.Wait();
         }
 
+        /// <summary>
+        /// Correlate the fingerprints
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         private Shift Correlate(Tuple<Fingerprint, Fingerprint>[] a)
         {
             var chans = a[0].Item1.AudioFingerprints.Length;

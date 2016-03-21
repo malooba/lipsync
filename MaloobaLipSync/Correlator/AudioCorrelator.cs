@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MaloobaLipSync.Correlator
 {
-    static class AudioCorrelator
+    internal static class AudioCorrelator
     {
         /// <summary>
         /// Perform an audio fingerprint correlation

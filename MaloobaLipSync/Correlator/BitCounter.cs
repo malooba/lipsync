@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MaloobaLipSync.Correlator
 {
-    static class BitCounter
+    internal static class BitCounter
     {
         private static readonly int[] byteBitCount = new[]
         {
