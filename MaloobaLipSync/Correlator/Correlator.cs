@@ -86,7 +86,10 @@ namespace MaloobaLipSync.Correlator
                 bool chPresentA;
                 bool chPresentB;
 
-                var corr = AudioCorrelator.Correlate(ch, a.Select(i => i.Item2).Skip(needleOffset), config.NeedleFrames, a.Select(i => i.Item1), config.HaystackFrames, out chPresentA, out chPresentB);
+                var corr = AudioCorrelator.Correlate(ch, a.Select(i => i.Item2).Skip(needleOffset), config.NeedleFrames, 
+                                                         a.Select(i => i.Item1), config.HaystackFrames, 
+                                                         out chPresentA, 
+                                                         out chPresentB);
                 shift.AudioPresentA[ch] = chPresentA;
                 shift.AudioPresentB[ch] = chPresentB;
                 if(corr == null)
@@ -166,7 +169,7 @@ namespace MaloobaLipSync.Correlator
                 if(last + 5 < result.Length - 1)
                     pk2 = result.Skip(last + 5).Max();
 
-                confidence = 1.0 - (Math.Max(pk1, pk2) / peak);
+                confidence = (peak - Math.Max(pk1, pk2)) / peak;
                 return ((double)last + first - result.Length) / 2.0;
             }
 

@@ -7,13 +7,13 @@
     xmlns:viewModel="clr-namespace:MaloobaLipSync.ViewModel"
     d1p1:Ignorable="d" 
     StartupUri="MainWindow.xaml">
+
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- Main application resource file -->
                 <ResourceDictionary Source="Resources.xaml" />
                 <ResourceDictionary>
-                    <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
+                    <viewModel:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

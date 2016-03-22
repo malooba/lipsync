@@ -7,12 +7,13 @@
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:maloobaLipSync="clr-namespace:MaloobaLipSync"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="Malooba Lip Sync" 
         x:Name="window" 
         SizeToContent="Width" 
         Height="150" 
         Background="{StaticResource BackgroundBrush}"
         DataContext="{Binding Source={StaticResource Locator}}">
+    
     
     <Grid Width="Auto" Height="200" Margin="10">
         <!-- Animation of config window -->

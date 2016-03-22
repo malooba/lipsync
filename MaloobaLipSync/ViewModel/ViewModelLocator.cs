@@ -12,6 +12,8 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using System;
+using System.Diagnostics;
 using GalaSoft.MvvmLight;
 
 namespace MaloobaLipSync.ViewModel
@@ -27,23 +29,24 @@ namespace MaloobaLipSync.ViewModel
         /// </summary>
         static ViewModelLocator()
         {
-            if(ViewModelBase.IsInDesignModeStatic)
-            {
-                main = new MainViewModel();
-                configuration = new ConfigViewModel();
-            }
-            else
-            {
-                main = new MainViewModel();
-                configuration = new ConfigViewModel();
-            }
+            //if(ViewModelBase.IsInDesignModeStatic)
+            //{
+            //    main = new MainViewModel();
+            //    configuration = new ConfigViewModel();
+            //}
+            //else
+            //{
+            //    main = new MainViewModel();
+            //    configuration = new v();
+            //}
         }
 
-        public IMainViewModel Main => main;
-        private static readonly IMainViewModel main;
+        public IMainViewModel Main => main ?? (main = new MainViewModel());
 
-        public IConfigViewModel Configuration => configuration;
-        private static readonly IConfigViewModel configuration;
+        private static IMainViewModel main ;
+
+        public IConfigViewModel Configuration => configuration ?? (configuration = new ConfigViewModel());
+        private static IConfigViewModel configuration;
 
         public static void Cleanup()
         {

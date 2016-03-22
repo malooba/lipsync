@@ -69,7 +69,7 @@ namespace MaloobaLipSync
             }
             catch
             {
-                MessageBox.Show("Settings are corrupted - Ignoring", "Warning", MessageBoxButton.OK);
+                // MessageBox.Show("Settings are corrupted - Ignoring", "Warning", MessageBoxButton.OK);
                 Clear();
             }
         }

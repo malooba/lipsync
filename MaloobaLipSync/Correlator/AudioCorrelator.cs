@@ -82,7 +82,7 @@ namespace MaloobaLipSync.Correlator
                 {
                     var count = 0;
                     for(var frame = 0; frame <= n; frame++)
-                        count += BitCounter.Count(bufn[frame] & bufm[frame + frameShift]);
+                        count += 16 - BitCounter.Count(bufn[frame] ^ bufm[frame + frameShift]);
                     result[frameShift * nbits + bitShift] = count;
                 }
                 // Now shift bufn by one bit

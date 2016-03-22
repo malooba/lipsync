@@ -6,7 +6,7 @@
         public const int DEFAULT_NEEDLE_FRAMES = 13;
         public const int DEFAULT_STEP_FRAMES = 5;
         public const int DEFAULT_CLEANUP_FRAMES = 20;
-        public const double DEFAULT_CONFIDENCE_THRESHOLD = 0.1;
+        public const double DEFAULT_CONFIDENCE_THRESHOLD = 0.4;
 
         public string HostA;
         public string PortA;

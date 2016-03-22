@@ -89,10 +89,10 @@ namespace MaloobaLipSync.ViewModel
             StepFrames = configFile["StepFrames"] ?? CorrelatorConfig.DEFAULT_STEP_FRAMES.ToString();
             CleanupFrames = configFile["CleanupFrames"] ?? CorrelatorConfig.DEFAULT_CLEANUP_FRAMES.ToString();
             ConfidenceThreshold = configFile["ConfidenceThreshold"] ?? CorrelatorConfig.DEFAULT_CONFIDENCE_THRESHOLD.ToString(CultureInfo.InvariantCulture);
-            HostA = configFile["HostA"];
-            PortA = configFile["PortA"];
-            HostB = configFile["HostB"];
-            PortB = configFile["PortB"];
+            hostA = configFile["HostA"] ?? "0.0.0.0";
+            portA = configFile["PortA"] ?? "0.0.0.0";
+            hostB = configFile["HostB"] ?? "11000";
+            portB = configFile["PortB"] ?? "11001";
             SaveConfiguration();   // Save any defaults that were applied
             Validate();
         }
