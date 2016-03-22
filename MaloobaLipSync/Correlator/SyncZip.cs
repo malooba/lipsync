@@ -71,7 +71,7 @@ namespace MaloobaLipSync.Correlator
 
                     // If the new value is earlier then discard it
                     if(comp < 0)
-                        break;
+                        return;
 
                     // The queued item will now be matched or discarded so dequeue it
                     var otherItem = q.Dequeue();
@@ -82,10 +82,13 @@ namespace MaloobaLipSync.Correlator
                         // call function with (item0, item 1)
                         var t = index == 0 ? f(value, otherItem) : f(otherItem, value);
                         subject.OnNext(t);
-                        break;
+                        return;
                     }
                     // Loop until value is matched, discarded or queue is empty
                 }
+                // Not matched - put value on the queue
+                qid = index;
+                q.Enqueue(value);
             }
         }
 
