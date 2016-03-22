@@ -88,6 +88,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="FingerprintAnalyser\Analyser.cs" />
     <Compile Include="FingerprintAnalyser\AnalyserConfig.cs" />
     <Compile Include="FingerprintAnalyser\Biquad.cs" />
