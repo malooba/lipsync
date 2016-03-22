@@ -12,7 +12,8 @@ namespace MaloobaLipSync.Correlator
     /// <typeparam name="U"></typeparam>
     internal class SyncZip<T, U> : IDisposable, IObservable<U> where T : IComparable<T>
     {
-        private readonly Queue<T>[] q;         // Source queues
+        private readonly Queue<T> q;           // Queue of items from leading input
+        private int qid;                       // Id of queued items
         private readonly bool[] done;          // Flag completion of sources
         private readonly Func<T, T, U> f;      // Combining function
         private readonly Subject<U> subject;   // Subject to manage subscriptions
@@ -38,9 +39,7 @@ namespace MaloobaLipSync.Correlator
         {
             this.f = f;
             done = new bool[2];         
-            q = new Queue<T>[2];        
-            q[0] = new Queue<T>();
-            q[1] = new Queue<T>();
+            q = new Queue<T>();        
 
             subject = new Subject<U>();
 
@@ -54,27 +53,28 @@ namespace MaloobaLipSync.Correlator
         {
             lock(q)
             {
-                var other = q[1 - index];
-                while(true)
+                if(q.Count == 0) qid = index;
+
+                if(qid == index)
                 {
-                    // Always enque if the other queue is empty
-                    if(other.Count == 0)
-                    {
-                        q[index].Enqueue(value);
+                    q.Enqueue(value);
 
-                        if(q.Length > QueueMax)
-                            OnError(new ApplicationException("SyncZip sources are overly misaligned"));
-                        return;
-                    }
+                    // If the queue overflows then just dump it - presumably we only have one input
+                    if(q.Count > QueueMax)
+                        q.Clear();
+                    return;
+                }
 
-                    var comp = value.CompareTo(other.Peek());
+                while(q.Count > 0)
+                {
+                    var comp = value.CompareTo(q.Peek());
 
-                    // If the new value is smaller then discard it
+                    // If the new value is earlier then discard it
                     if(comp < 0)
-                        return;
+                        break;
 
-                    // The other item will now be matched or discarded so dequeue it
-                    var otherItem = other.Dequeue();
+                    // The queued item will now be matched or discarded so dequeue it
+                    var otherItem = q.Dequeue();
 
                     // We have a match!
                     if(comp == 0)
@@ -82,9 +82,9 @@ namespace MaloobaLipSync.Correlator
                         // call function with (item0, item 1)
                         var t = index == 0 ? f(value, otherItem) : f(otherItem, value);
                         subject.OnNext(t);
-                        return;
+                        break;
                     }
-                    // Loop until matched or value is enqueued
+                    // Loop until value is matched, discarded or queue is empty
                 }
             }
         }
@@ -95,8 +95,7 @@ namespace MaloobaLipSync.Correlator
             done[index] = true;
             if(done[0] && done[1])
             {
-                q[0].Clear();
-                q[1].Clear();
+                q.Clear();
                 subject.OnCompleted();
             }
         }
@@ -105,8 +104,7 @@ namespace MaloobaLipSync.Correlator
         {
             subs[0]?.Dispose();
             subs[1]?.Dispose();
-            q[0].Clear();
-            q[1].Clear();
+            q.Clear();
             subject.OnError(ex);
         }
 
