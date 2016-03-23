@@ -1,0 +1,11 @@
+{
+  "HostA": "0.0.0.0",
+  "PortA": "11000",
+  "HostB": "0.0.0.0",
+  "PortB": "11001",
+  "HaystackFrames": "51",
+  "NeedleFrames": "13",
+  "StepFrames": "5",
+  "CleanupFrames": "20",
+  "ConfidenceThreshold": "0.1"
+}

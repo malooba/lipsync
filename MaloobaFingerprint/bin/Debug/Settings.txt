@@ -1,0 +1,7 @@
+{
+  "Device": "Recorder 1",
+  "VideoMode": "1080p25",
+  "TimecodeMode": "RP188 Any",
+  "Host": "127.0.0.1",
+  "Port": "11000"
+}
