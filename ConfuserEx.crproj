@@ -1,0 +1,5 @@
+<project outputDir=".\Confused" baseDir="." xmlns="http://confuser.codeplex.com">
+  <rule pattern="true" preset="aggressive" inherit="false" />
+  <module path="MaloobaFingerprint\bin\Release\MaloobaFingerprint.exe" />
+  <module path="MaloobaLipSync\bin\Release\MaloobaLipSync.exe" />
+</project>
