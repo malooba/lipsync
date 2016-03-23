@@ -22,18 +22,18 @@ namespace MaloobaLipSync.Correlator
         public int QueueMax { get; set; } = 10000;
 
         /// <summary>
-        /// Combine a stream of ordered events, x with another stream of events y using function f
-        /// Events are combined only if their order parameters match.  Events which do not have a corresponding 
-        /// event in the other stream are discarded.
-        /// Both streams of events are assumed to have strictly increasing order parameters and events are 
+        /// Combine a stream of ordered messages, x with another stream of ordered messages y using function f
+        /// Messages are combined only if their order parameters match.  Messages which do not have a corresponding 
+        /// message in the other stream are discarded.
+        /// Both streams of messages are assumed to have strictly increasing order parameters and messages are 
         /// IComparable (which compares their order parameters)
         /// 
         /// The specific use case here is to compare audio/video fingerprints that have matching timecode
         /// where the timecode is the order parameter.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="f"></param>
+        /// <param name="x">First stream of messages</param>
+        /// <param name="y">Second stream of messages</param>
+        /// <param name="f">Combining function</param>
         /// <returns></returns>
         public SyncZip(IObservable<T> x, IObservable<T> y, Func<T, T, U> f)
         {
