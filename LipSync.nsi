@@ -56,7 +56,6 @@ Section "Lip Sync" SEC01
   File "MaloobaLipSync\bin\Release\Microsoft.Expression.Interactions.dll"
   File "MaloobaLipSync\bin\Release\Microsoft.Practices.ServiceLocation.dll"
   File "MaloobaLipSync\bin\Release\Newtonsoft.Json.dll"
-  File "MaloobaLipSync\bin\Release\Settings.txt"
   File "MaloobaLipSync\bin\Release\System.Reactive.Core.dll"
   File "MaloobaLipSync\bin\Release\System.Reactive.Interfaces.dll"
   File "MaloobaLipSync\bin\Release\System.Reactive.Linq.dll"
@@ -64,8 +63,8 @@ Section "Lip Sync" SEC01
   File "MaloobaLipSync\bin\Release\System.Windows.Interactivity.dll"
   File "Confused\MaloobaLipSync\bin\Release\MaloobaLipSync.exe"
   CreateDirectory "$SMPROGRAMS\Malooba Lip Sync"
-  CreateShortCut "$SMPROGRAMS\Malooba Lip Sync\Malooba Lip Sync.lnk" "$INSTDIR\MaloobaLipSync.exe"
-  CreateShortCut "$DESKTOP\Malooba Lip Sync.lnk" "$INSTDIR\MaloobaLipSync.exe"
+  CreateShortCut "$SMPROGRAMS\Malooba Lip Sync\MaloobaLipSync.lnk" "$INSTDIR\MaloobaLipSync.exe"
+  CreateShortCut "$DESKTOP\MaloobaLipSync.lnk" "$INSTDIR\MaloobaLipSync.exe"
 SectionEnd
 
 Section "Fingerprint" SEC02
@@ -83,15 +82,15 @@ Section "Fingerprint" SEC02
   File "MaloobaFingerprint\bin\Release\XamlFingerprintAnalyser.vshost.exe"
   File "MaloobaFingerprint\bin\Release\XamlFingerprintAnalyser.vshost.exe.config"
   File "MaloobaFingerprint\bin\Release\XamlFingerprintAnalyser.vshost.exe.manifest"
-  File "Confused\MaloobaFingerprint\bin\Release\XamlFingerprintAnalyser.exe"
-  CreateDirectory "$SMPROGRAMS\Malooba Lip Sync"
-  CreateShortCut "$SMPROGRAMS\Malooba Lip Sync\Malooba Fingerprint.lnk" "$INSTDIR\Malooba Fingerprint.exe"
-  CreateShortCut "$DESKTOP\Malooba Fingerprint.lnk" "$INSTDIR\Malooba Fingerprint.exe"
+  File "Confused\MaloobaFingerprint\bin\Release\MaloobaFingerprint.exe"
+  CreateDirectory "$SMPROGRAMS\MaloobaLipSync"
+  CreateShortCut "$SMPROGRAMS\MaloobaLipSync\MaloobaFingerprint.lnk" "$INSTDIR\MaloobaFingerprint.exe"
+  CreateShortCut "$DESKTOP\MaloobaFingerprint.lnk" "$INSTDIR\MaloobaFingerprint.exe"
 SectionEnd
 
 Section -AdditionalIcons
   SetOutPath $INSTDIR
-  CreateShortCut "$SMPROGRAMS\Malooba Lip Sync\Uninstall.lnk" "$INSTDIR\uninst.exe"
+  CreateShortCut "$SMPROGRAMS\MaloobaLipSync\Uninstall.lnk" "$INSTDIR\uninst.exe"
 SectionEnd
 
 Section -Post
@@ -151,12 +150,12 @@ Section Uninstall
   Delete "$INSTDIR\GalaSoft.MvvmLight.Platform.dll"
   Delete "$INSTDIR\GalaSoft.MvvmLight.Extras.dll"
   Delete "$INSTDIR\GalaSoft.MvvmLight.dll"
-  Delete "$SMPROGRAMS\Malooba Lip Sync\Uninstall.lnk"
-  Delete "$DESKTOP\Malooba Lip Sync.lnk"
-  Delete "$SMPROGRAMS\Malooba Lip Sync\Malooba Lip Sync.lnk"
-  Delete "$DESKTOP\Malooba Fingerprint.lnk"
-  Delete "$SMPROGRAMS\Malooba Lip Sync\Malooba Fingerprint.lnk"
-  RMDir "$SMPROGRAMS\Malooba Lip Sync"
+  Delete "$SMPROGRAMS\MaloobaLipSync\Uninstall.lnk"
+  Delete "$DESKTOP\MaloobaLipSync.lnk"
+  Delete "$SMPROGRAMS\MaloobaLipSync\MaloobaLipSync.lnk"
+  Delete "$DESKTOP\MaloobaFingerprint.lnk"
+  Delete "$SMPROGRAMS\MaloobaLipSync\MaloobaFingerprint.lnk"
+  RMDir "$SMPROGRAMS\MaloobaLipSync"
   RMDir "$INSTDIR"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
