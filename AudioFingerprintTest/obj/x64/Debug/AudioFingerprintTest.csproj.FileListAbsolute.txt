@@ -1,7 +1,0 @@
-D:\Work\Repos\FingerprintAnalyser\AudioFingerprintTest\bin\x64\Debug\AudioFingerprintTest.dll
-D:\Work\Repos\FingerprintAnalyser\AudioFingerprintTest\bin\x64\Debug\AudioFingerprintTest.pdb
-D:\Work\Repos\FingerprintAnalyser\AudioFingerprintTest\bin\x64\Debug\FingerprintAnalyser.exe
-D:\Work\Repos\FingerprintAnalyser\AudioFingerprintTest\bin\x64\Debug\FingerprintAnalyser.pdb
-D:\Work\Repos\FingerprintAnalyser\AudioFingerprintTest\obj\x64\Debug\AudioFingerprintTest.csprojResolveAssemblyReference.cache
-D:\Work\Repos\FingerprintAnalyser\AudioFingerprintTest\obj\x64\Debug\AudioFingerprintTest.dll
-D:\Work\Repos\FingerprintAnalyser\AudioFingerprintTest\obj\x64\Debug\AudioFingerprintTest.pdb
