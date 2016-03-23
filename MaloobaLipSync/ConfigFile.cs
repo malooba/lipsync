@@ -47,7 +47,7 @@ namespace MaloobaLipSync
         /// </summary>
         public ConfigFile()
         {
-            configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Settings.txt");
+            configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MaloobaLipSync\\Settings.txt");
             Restore();
         }
 
