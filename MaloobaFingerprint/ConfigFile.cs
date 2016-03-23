@@ -47,7 +47,7 @@ namespace MaloobaFingerprint
         /// </summary>
         public ConfigFile()
         {
-            configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings.txt");
+            configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Settings.txt");
             Restore();
         }
 

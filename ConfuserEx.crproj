@@ -1,13 +1,7 @@
 <project outputDir=".\Confused" baseDir="." xmlns="http://confuser.codeplex.com">
-    <rule preset="none" pattern="true">
-		<protection id="anti debug" />
-		<protection id="anti dump" />
-		<protection id="anti tamper" />
-		<protection id="constants" />
-		<protection id="ctrl flow" />
-		<protection id="invalid metadata" />
-		<protection id="ref proxy" />
-    </rule>
-	<module path="MaloobaFingerprint\bin\Release\MaloobaFingerprint.exe" />
-	<module path="MaloobaLipSync\bin\Release\MaloobaLipSync.exe" />
+  <rule pattern="true" inherit="false">
+    <protection id="anti debug" />
+  </rule>
+  <module path="MaloobaFingerprint\bin\Release\MaloobaFingerprint.exe" />
+  <module path="MaloobaLipSync\bin\Release\MaloobaLipSync.exe" />
 </project>

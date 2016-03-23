@@ -50,7 +50,6 @@ Section "Lip Sync" SEC01
   SetOutPath "$INSTDIR"
   File "MaloobaLipSync\bin\Release\GalaSoft.MvvmLight.dll"
   File "MaloobaLipSync\bin\Release\GalaSoft.MvvmLight.Extras.dll"
-  File "MaloobaLipSync\bin\Release\GalaSoft.MvvmLight.pdb"
   File "MaloobaLipSync\bin\Release\GalaSoft.MvvmLight.Platform.dll"
   File "MaloobaLipSync\bin\Release\MaloobaLipSync.exe.config"
   File "MaloobaLipSync\bin\Release\Microsoft.Expression.Interactions.dll"
