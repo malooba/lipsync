@@ -45,10 +45,10 @@ namespace MaloobaLipSync.Correlator
         /// </summary>
         private void ProcessInputs()
         {
-            // Create a sequence of fingerprints from the first souce
+            // Create a sequence of fingerprints from the first source
             var s1 = UdpObservable.Create(inputA).Select(b => new Fingerprint(b));
 
-            // Create a sequence of fingerprints from the second souce
+            // Create a sequence of fingerprints from the second source
             var s2 = UdpObservable.Create(inputB).Select(b => new Fingerprint(b));
 
             // Create a sequence of paired fingerprints with matching timecodes

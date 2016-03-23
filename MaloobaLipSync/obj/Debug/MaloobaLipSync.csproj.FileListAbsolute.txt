@@ -135,17 +135,6 @@ D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\System.Reactive.Core.xml
 D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\System.Reactive.Interfaces.xml
 D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\System.Reactive.Linq.xml
 D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\System.Reactive.PlatformServices.xml
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\obj\Debug\MaloobaLipSync.csprojResolveAssemblyReference.cache
 D:\Work\Repos\LipSync\MaloobaLipSync\obj\Debug\IndicatorLabel.baml
 D:\Work\Repos\LipSync\MaloobaLipSync\obj\Debug\Resources.baml
 D:\Work\Repos\LipSync\MaloobaLipSync\obj\Debug\ChannelControl.g.cs

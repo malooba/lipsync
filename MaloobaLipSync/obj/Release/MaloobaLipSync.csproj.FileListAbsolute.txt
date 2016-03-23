@@ -25,16 +25,6 @@ D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\System.Reactive.Core.xml
 D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\System.Reactive.Interfaces.xml
 D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\System.Reactive.Linq.xml
 D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\System.Reactive.PlatformServices.xml
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\de\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\en\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\es\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\fr\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\it\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\ja\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\ko\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\ru\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\zh-Hans\Microsoft.Expression.Interactions.resources.dll
-D:\Work\Repos\LipSync\MaloobaLipSync\bin\Release\zh-Hant\Microsoft.Expression.Interactions.resources.dll
 D:\Work\Repos\LipSync\MaloobaLipSync\obj\Release\IndicatorLabel.baml
 D:\Work\Repos\LipSync\MaloobaLipSync\obj\Release\Resources.baml
 D:\Work\Repos\LipSync\MaloobaLipSync\obj\Release\ChannelControl.g.cs
@@ -52,3 +42,4 @@ D:\Work\Repos\LipSync\MaloobaLipSync\obj\Release\MaloobaLipSync.Properties.Resou
 D:\Work\Repos\LipSync\MaloobaLipSync\obj\Release\MaloobaLipSync.csproj.GenerateResource.Cache
 D:\Work\Repos\LipSync\MaloobaLipSync\obj\Release\MaloobaLipSync.exe
 D:\Work\Repos\LipSync\MaloobaLipSync\obj\Release\MaloobaLipSync.pdb
+D:\Work\Repos\LipSync\MaloobaLipSync\obj\Release\MaloobaLipSync.csprojResolveAssemblyReference.cache
