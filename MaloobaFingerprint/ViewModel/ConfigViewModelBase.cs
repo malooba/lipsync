@@ -99,7 +99,7 @@ namespace MaloobaFingerprint.ViewModel
             InitVideoModes();
             InitTimecodeModes();
             OkCommand = new RelayCommand<Window>(OkExecuted, OkCanExecute);
-            configFile = new ConfigFile();
+            configFile = new ConfigFile("MaloobaFingerprint");
         }
 
         /// <summary>

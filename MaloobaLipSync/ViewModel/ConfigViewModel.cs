@@ -67,7 +67,7 @@ namespace MaloobaLipSync.ViewModel
         /// <summary>
         /// JSON file of configuration settings
         /// </summary>
-        private ConfigFile configFile;
+        private readonly ConfigFile configFile;
 
         /// <summary>
         /// Constructor
@@ -75,7 +75,7 @@ namespace MaloobaLipSync.ViewModel
         public ConfigViewModel()
         {
             brokenRules = new Dictionary<string, string>();
-            configFile = new ConfigFile();
+            configFile = new ConfigFile("MaloobaLipSync");
             RestoreConfiguration();
         }
 
