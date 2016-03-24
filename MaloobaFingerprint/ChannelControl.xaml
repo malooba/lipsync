@@ -6,7 +6,7 @@
              xmlns:maloobaFingerprint="clr-namespace:MaloobaFingerprint"
              mc:Ignorable="d" Height="Auto" Width="Auto">
 
-    <Grid Margin="0"  Width="25" Height="80">
+    <Grid Margin="0"  Width="35" Height="80">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>

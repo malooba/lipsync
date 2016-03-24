@@ -10,11 +10,11 @@
         Title="MainWindow" 
         x:Name="window" 
         SizeToContent="Width" 
-        Height="166" 
+        Height="160" 
         Background="{StaticResource BackgroundBrush}"
         DataContext="{Binding Source={StaticResource Locator}}">
 
-    <Grid Width="Auto" Height="250" Margin="10">
+    <Grid Width="Auto" Height="240" Margin="10">
         <!-- Animation of config window -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ShowHideConfig">
@@ -24,7 +24,7 @@
                 <VisualState x:Name="HideConfig">
                     <Storyboard>
                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="window">
-                            <EasingDoubleKeyFrame KeyTime="0" Value="166" />
+                            <EasingDoubleKeyFrame KeyTime="0" Value="160" />
                         </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
@@ -39,7 +39,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="1.0*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="3.5*" />
         </Grid.RowDefinitions>
@@ -47,14 +47,16 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
+            <Image Source="pack://application:,,,/Resources/MaloobaFingerprintAlpha.png" Height="22" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <!--
             <Label x:Name="LabelMalooba" Content="Malooba" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource TextColourBrush}" FontSize="18.667" FontFamily="Arial" />
             <Label x:Name="LabelName" Content="Audio Fingerprint Generator" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource TextColourBrush}" />
-
+            -->
             <RadioButton x:Name="Settings" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Settings" Command="{Binding Main.ConfigCommand}" Grid.Column="3">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Checked">
@@ -94,30 +96,78 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
-        <Grid Grid.Row="2" DataContext="{Binding Path=Configuration, Source={StaticResource Locator}}" Margin="0,10,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Label x:Name="LabelDevices" Grid.Row="0" Grid.Column="0" Content="Decklink Device" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Label x:Name="LabelVideoMode" Grid.Row="1" Grid.Column="0" Content="Video Mode" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Label x:Name="LabelTimecodeMode" Grid.Row="1" Grid.Column="2" Content="Timecode Mode" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Label x:Name="LabelHost" Grid.Row="2" Grid.Column="0" Content="Host" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Label x:Name="LabelPort" Grid.Row="2" Grid.Column="2" Content="Port" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <ComboBox x:Name="Devices" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Devices}" SelectedItem="{Binding Device, ValidatesOnDataErrors=True}" DisplayMemberPath="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" IsReadOnly="True" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" Grid.ColumnSpan="2" />
-            <ComboBox x:Name="VideoMode" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding VideoModes}" SelectedItem="{Binding VideoMode}" DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="0,0,0,20" VerticalAlignment="Top" Width="170" IsReadOnly="True" SelectedIndex="0" />
-            <ComboBox x:Name="TimecodeMode" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding TimecodeModes}" SelectedItem="{Binding TimecodeMode}" DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="0,0,0,20" VerticalAlignment="Top" Width="170" IsReadOnly="True" SelectedIndex="0" />
-            <TextBox x:Name="Host" Grid.Row="2" Grid.Column="1" Text="{Binding Path=Host, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
-            <TextBox x:Name="Port" Grid.Row="2" Grid.Column="3" Text="{Binding Path=Port, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
-        </Grid>
+        <TabControl Grid.Row="2" Background="{StaticResource BackgroundBrush}" DataContext="{Binding Path=Configuration, Source={StaticResource Locator}}">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabPanel}">
+                    <Setter Property="Background" Value="Green"></Setter>
+                </Style>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Padding" Value="0" />
+                    <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+                    <Setter Property="Foreground" Value="{StaticResource TextColourBrush}"/>
+                    <Setter Property="BorderBrush" Value="{StaticResource DarkerBrush}"/>
+                </Style>
+            </TabControl.Resources>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Input"/>
+                </TabItem.Header>
+                <Grid Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="LabelDevices" Grid.Row="0" Grid.Column="0" Content="Decklink Device" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <ComboBox x:Name="Devices" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Devices}" SelectedItem="{Binding Device, ValidatesOnDataErrors=True}" DisplayMemberPath="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" IsReadOnly="True" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" Grid.ColumnSpan="2" />
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Video"/>
+                </TabItem.Header>
+                <Grid Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="LabelVideoMode" Grid.Row="0" Grid.Column="0" Content="Video Mode" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <Label x:Name="LabelTimecodeMode" Grid.Row="1" Grid.Column="0" Content="Timecode Mode" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <ComboBox x:Name="VideoMode" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding VideoModes}" SelectedItem="{Binding VideoMode}" DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="0,0,0,20" VerticalAlignment="Top" Width="170" IsReadOnly="True" SelectedIndex="0" />
+                    <ComboBox x:Name="TimecodeMode" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding TimecodeModes}" SelectedItem="{Binding TimecodeMode}" DisplayMemberPath="Name" HorizontalAlignment="Left" Margin="0,0,0,20" VerticalAlignment="Top" Width="170" IsReadOnly="True" SelectedIndex="0" />
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="Output" />
+                </TabItem.Header>
+                <Grid Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="LabelHost" Grid.Row="0" Grid.Column="0" Content="Host" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <Label x:Name="LabelPort" Grid.Row="1" Grid.Column="0" Content="Port" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <TextBox x:Name="Host" Grid.Row="0" Grid.Column="1" Text="{Binding Path=Host, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
+                    <TextBox x:Name="Port" Grid.Row="1" Grid.Column="1" Text="{Binding Path=Port, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
+
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

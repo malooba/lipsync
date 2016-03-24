@@ -52,9 +52,11 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
+            <Image Source="pack://application:,,,/Resources/MaloobaLipSyncAlpha.png" Height="32" RenderOptions.BitmapScalingMode="HighQuality" />
+            <!--
             <Label x:Name="LabelMalooba" Content="Malooba" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource TextColourBrush}" FontSize="18.667" FontFamily="Arial" />
             <Label x:Name="LabelName" Content="LipSync" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource TextColourBrush}" />
-
+            -->
             <RadioButton x:Name="Settings" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Settings" Command="{Binding Main.ConfigCommand}" Grid.Column="3">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Checked">
@@ -67,7 +69,6 @@
             </RadioButton>
             <RadioButton x:Name="Off" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Off" Command="{Binding Main.OffCommand}" Grid.Column="4" IsChecked="{Binding Main.OffMode}" />
             <RadioButton x:Name="Run" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Run" Command="{Binding Main.RunCommand}" Grid.Column="5" />
-            <Label x:Name="label" Content="{Binding Main.Timecode}" Grid.Column="2" HorizontalAlignment="Left"  VerticalAlignment="Top" Foreground="white"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -77,13 +78,9 @@
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <!--
-                <Label x:Name="LabelTimecode" Content="{Binding Main.Timecode}" Grid.Row="0" Foreground="{StaticResource TextColourBrush}" Background="{DynamicResource DarkerBrush}" BorderBrush="{StaticResource BorderColourBrush}" BorderThickness="2" VerticalContentAlignment="Top" FontSize="20" />
-                <Label x:Name="LabelDevice" Content="Stuff" Grid.Row="1" Foreground="{StaticResource TextColourBrush}" Background="{DynamicResource BackgroundBrush}" FontSize="10" />
-                -->
-            </Grid>
+                <Label x:Name="LabelTimecode" Content="{Binding Main.Timecode}" Grid.Row="0" Foreground="{StaticResource TextColourBrush}" Background="{DynamicResource DarkerBrush}" BorderThickness="2" VerticalAlignment="Top" VerticalContentAlignment="Top" FontSize="20" Height="40"/>
+             </Grid>
             <ItemsControl ItemsSource="{Binding Main.Channels}" Grid.Column="1">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
