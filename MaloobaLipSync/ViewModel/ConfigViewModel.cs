@@ -90,8 +90,8 @@ namespace MaloobaLipSync.ViewModel
             CleanupFrames = configFile["CleanupFrames"] ?? CorrelatorConfig.DEFAULT_CLEANUP_FRAMES.ToString();
             ConfidenceThreshold = configFile["ConfidenceThreshold"] ?? CorrelatorConfig.DEFAULT_CONFIDENCE_THRESHOLD.ToString(CultureInfo.InvariantCulture);
             hostA = configFile["HostA"] ?? "0.0.0.0";
-            portA = configFile["PortA"] ?? "0.0.0.0";
-            hostB = configFile["HostB"] ?? "11000";
+            portA = configFile["PortA"] ?? "11000";
+            hostB = configFile["HostB"] ?? "0.0.0.0";
             portB = configFile["PortB"] ?? "11001";
             SaveConfiguration();   // Save any defaults that were applied
             Validate();
