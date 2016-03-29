@@ -22,31 +22,27 @@ namespace MaloobaFingerprint.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
-        /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
-        /// </summary>
-        static ViewModelLocator()
+        public static string[] Args { get; set; }
+        public IMainViewModel Main => main ?? (main = new MainViewModel());
+
+        private static IMainViewModel main;
+
+        public IConfigViewModel Configuration
         {
-            if(ViewModelBase.IsInDesignModeStatic)
+            get
             {
-                main = new MainViewModel();
-                configuration = new DesignConfigViewModel();
-            }
-            else
-            {
-                main = new MainViewModel();
-                configuration = new ConfigViewModel();
+                if(configuration == null)
+                {
+                    if(ViewModelBase.IsInDesignModeStatic)
+                        configuration = new DesignConfigViewModel(null);
+                    else
+                        configuration = new ConfigViewModel(Args);
+                }
+                return configuration;
             }
         }
 
-        public ViewModelLocator()
-        { }
-
-        public IMainViewModel Main => main;
-        private static readonly IMainViewModel main;
-
-        public IConfigViewModel Configuration => configuration;
-        private static readonly IConfigViewModel configuration;
+        private static IConfigViewModel configuration;
 
         public static void Cleanup()
         {

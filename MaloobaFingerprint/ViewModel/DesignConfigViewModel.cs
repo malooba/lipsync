@@ -7,7 +7,7 @@ namespace MaloobaFingerprint.ViewModel
         /// <summary>
         /// Create some dummy devices for design mode
         /// </summary>
-        public DesignConfigViewModel()
+        public DesignConfigViewModel(string[] args) : base(args)
         {
             Devices = new ObservableCollection<InputDevice>
             {

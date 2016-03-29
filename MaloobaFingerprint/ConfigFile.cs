@@ -45,11 +45,11 @@ namespace MaloobaFingerprint
         /// <summary>
         /// Open and restore configuration
         /// </summary>
-        public ConfigFile(string applicationName)
+        public ConfigFile(string applicationName, string fileName)
         {
             var configDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), applicationName);
             Directory.CreateDirectory(configDir);
-            configPath = Path.Combine(configDir, "Settings.txt");
+            configPath = Path.Combine(configDir, fileName);
             Restore();
         }
 

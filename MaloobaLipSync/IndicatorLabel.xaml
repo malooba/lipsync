@@ -7,7 +7,7 @@
              d:DesignHeight="30" d:DesignWidth="30">
     <UserControl.Template>
         <ControlTemplate>
-            <Label x:Name="lamp" Content="{Binding Content , RelativeSource={RelativeSource AncestorType=UserControl}}" Foreground="Black" Background="Transparent"/>
+            <Label Name="lamp" Content="{Binding Content , RelativeSource={RelativeSource AncestorType=UserControl}}" Foreground="Black" Background="Transparent"/>
             <ControlTemplate.Triggers>
                 <DataTrigger Binding="{Binding IsLit, RelativeSource={RelativeSource Self}}" Value="True">
                     <Setter TargetName="lamp" Property="Foreground" Value="{StaticResource PurestGreenBrush}" />

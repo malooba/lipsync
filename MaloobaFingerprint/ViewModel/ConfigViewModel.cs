@@ -5,7 +5,7 @@ namespace MaloobaFingerprint.ViewModel
 {
     public class ConfigViewModel : ConfigViewModelBase
     {
-        public ConfigViewModel()
+        public ConfigViewModel(string[] args) : base(args)
         {
             Devices = new ObservableCollection<InputDevice>();
             var dli = new CDeckLinkIterator();

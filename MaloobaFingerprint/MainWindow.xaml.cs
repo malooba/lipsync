@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Media;
+using System.Windows.Controls;
 
 namespace MaloobaFingerprint
 {
@@ -10,6 +12,15 @@ namespace MaloobaFingerprint
         public MainWindow()
         {
             InitializeComponent();
+
+            ConfigTabs.SelectionChanged += TabChanged;
+        }
+
+        // Change the tab header label text colour
+        private void TabChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach(TabItem tab in ConfigTabs.Items)
+                (tab.Header as Label).Foreground = tab.IsSelected ? Brushes.Black : Brushes.White;
         }
     }
 }

@@ -17,7 +17,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <Label x:Name="RadioLabel" Content="{TemplateBinding Content}"  HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Label Name="RadioLabel" Content="{TemplateBinding Content}"  HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="RadioLabel" Property="Foreground" Value="{StaticResource PurestGreenBrush}"/>
@@ -30,9 +30,8 @@
 
     <ControlTemplate x:Key="ErrorText">
         <StackPanel>
-            <AdornedElementPlaceholder x:Name="elem"/>
-            <TextBlock Text="{Binding ElementName=elem, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" Foreground="Red"/>
+            <AdornedElementPlaceholder Name="elem" />
+            <TextBlock Text="{Binding ElementName=elem, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" Foreground="Red" />
         </StackPanel>
     </ControlTemplate>
-
 </ResourceDictionary>

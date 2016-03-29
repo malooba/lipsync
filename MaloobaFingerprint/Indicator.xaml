@@ -9,8 +9,8 @@
 
     <UserControl.Template>
         <ControlTemplate>
-            <Grid x:Name="me">
-                <Rectangle x:Name="lamp" Fill="{StaticResource DarkerBrush}" Stroke="Black"/>
+            <Grid Name="me">
+                <Rectangle Name="lamp" Fill="{StaticResource DarkerBrush}" Stroke="Black"/>
             </Grid>
             <ControlTemplate.Triggers>
                 <DataTrigger Binding="{Binding IsLit, RelativeSource={RelativeSource Self}}" Value="True">

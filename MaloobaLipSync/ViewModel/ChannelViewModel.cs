@@ -23,14 +23,14 @@ namespace MaloobaLipSync.ViewModel
             get { return audioPresentA; }
             set { Set(nameof(AudioPresentA), ref audioPresentA, value); }
         }
-        private bool audioPresentA = true;
+        private bool audioPresentA;
 
         public bool AudioPresentB
         {
             get { return audioPresentB; }
             set { Set(nameof(AudioPresentB), ref audioPresentB, value); }
         }
-        private bool audioPresentB = true;
+        private bool audioPresentB;
 
         public ChannelViewModel(int index)
         {

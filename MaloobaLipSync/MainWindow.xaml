@@ -8,7 +8,7 @@
         xmlns:maloobaLipSync="clr-namespace:MaloobaLipSync"
         mc:Ignorable="d"
         Title="Malooba Lip Sync" 
-        x:Name="window" 
+        Name="window" 
         SizeToContent="Width" 
         Height="150" 
         Background="{StaticResource BackgroundBrush}"
@@ -18,18 +18,18 @@
     <Grid Width="Auto" Height="200" Margin="10">
         <!-- Animation of config window -->
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="ShowHideConfig">
+            <VisualStateGroup Name="ShowHideConfig">
                 <VisualStateGroup.Transitions>
                     <VisualTransition GeneratedDuration="0:0:0.3" />
                 </VisualStateGroup.Transitions>
-                <VisualState x:Name="HideConfig">
+                <VisualState Name="HideConfig">
                     <Storyboard>
                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="window">
                             <EasingDoubleKeyFrame KeyTime="0" Value="150" />
                         </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
-                <VisualState x:Name="ShowConfig">
+                <VisualState Name="ShowConfig">
                     <Storyboard>
                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="window">
                             <EasingDoubleKeyFrame KeyTime="0" Value="250" />
@@ -54,10 +54,10 @@
             </Grid.ColumnDefinitions>
             <Image Source="pack://application:,,,/Resources/MaloobaLipSyncAlpha.png" Height="32" RenderOptions.BitmapScalingMode="HighQuality" />
             <!--
-            <Label x:Name="LabelMalooba" Content="Malooba" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource TextColourBrush}" FontSize="18.667" FontFamily="Arial" />
-            <Label x:Name="LabelName" Content="LipSync" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource TextColourBrush}" />
+            <Label Name="LabelMalooba" Content="Malooba" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource TextColourBrush}" FontSize="18.667" FontFamily="Arial" />
+            <Label Name="LabelName" Content="LipSync" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource TextColourBrush}" />
             -->
-            <RadioButton x:Name="Settings" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Settings" Command="{Binding Main.ConfigCommand}" Grid.Column="3">
+            <RadioButton Name="Settings" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Settings" Command="{Binding Main.ConfigCommand}" Grid.Column="3">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Checked">
                         <ei:GoToStateAction StateName="ShowConfig" />
@@ -67,8 +67,8 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </RadioButton>
-            <RadioButton x:Name="Off" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Off" Command="{Binding Main.OffCommand}" Grid.Column="4" IsChecked="{Binding Main.OffMode}" />
-            <RadioButton x:Name="Run" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Run" Command="{Binding Main.RunCommand}" Grid.Column="5" />
+            <RadioButton Name="Off" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Off" Command="{Binding Main.OffCommand}" Grid.Column="4" IsChecked="{Binding Main.OffMode}" />
+            <RadioButton Name="Run" Style="{DynamicResource RadioTextStyle}" GroupName="Mode" Content="Run" Command="{Binding Main.RunCommand}" Grid.Column="5" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -79,7 +79,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Label x:Name="LabelTimecode" Content="{Binding Main.Timecode}" Grid.Row="0" Foreground="{StaticResource TextColourBrush}" Background="{DynamicResource DarkerBrush}" BorderThickness="2" VerticalAlignment="Top" VerticalContentAlignment="Top" FontSize="20" Height="40"/>
+                <Label Name="LabelTimecode" Content="{Binding Main.Timecode}" Grid.Row="0" Foreground="{StaticResource TextColourBrush}" Background="{DynamicResource DarkerBrush}" BorderThickness="2" VerticalAlignment="Top" VerticalContentAlignment="Top" FontSize="20" Height="40"/>
              </Grid>
             <ItemsControl ItemsSource="{Binding Main.Channels}" Grid.Column="1">
                 <ItemsControl.ItemsPanel>
@@ -107,16 +107,16 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Label x:Name="LabelA" Grid.Row="0" Grid.Column="0" Content="Input A" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" />
-            <Label x:Name="LabelB" Grid.Row="0" Grid.Column="3" Content="Input B" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" />
-            <Label x:Name="LabelHostA" Grid.Row="1" Grid.Column="0" Content="Host" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Label x:Name="LabelPortA" Grid.Row="2" Grid.Column="0" Content="Port" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Label x:Name="LabelHostB" Grid.Row="1" Grid.Column="3" Content="Host" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Label x:Name="LabelPortB" Grid.Row="2" Grid.Column="3" Content="Port" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <TextBox x:Name="HostA" Grid.Row="1" Grid.Column="1" Text="{Binding Path=HostA, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
-            <TextBox x:Name="PortA" Grid.Row="2" Grid.Column="1" Text="{Binding Path=PortA, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
-            <TextBox x:Name="HostB" Grid.Row="1" Grid.Column="4" Text="{Binding Path=HostB, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
-            <TextBox x:Name="PortB" Grid.Row="2" Grid.Column="4" Text="{Binding Path=PortB, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
+            <Label Name="LabelA" Grid.Row="0" Grid.Column="0" Content="Reference Input (A)" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" />
+            <Label Name="LabelB" Grid.Row="0" Grid.Column="3" Content="Broadcast Input (B)" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" />
+            <Label Name="LabelHostA" Grid.Row="1" Grid.Column="0" Content="Host" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Label Name="LabelPortA" Grid.Row="2" Grid.Column="0" Content="Port" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Label Name="LabelHostB" Grid.Row="1" Grid.Column="3" Content="Host" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Label Name="LabelPortB" Grid.Row="2" Grid.Column="3" Content="Port" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <TextBox Name="HostA" Grid.Row="1" Grid.Column="1" Text="{Binding Path=HostA, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
+            <TextBox Name="PortA" Grid.Row="2" Grid.Column="1" Text="{Binding Path=PortA, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
+            <TextBox Name="HostB" Grid.Row="1" Grid.Column="4" Text="{Binding Path=HostB, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
+            <TextBox Name="PortB" Grid.Row="2" Grid.Column="4" Text="{Binding Path=PortB, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,0,0,20" Validation.ErrorTemplate="{StaticResource ResourceKey=ErrorText}" />
         </Grid>
     </Grid>
 </Window>

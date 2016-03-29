@@ -72,10 +72,13 @@ namespace MaloobaLipSync.ViewModel
         /// <summary>
         /// Constructor
         /// </summary>
-        public ConfigViewModel()
+        public ConfigViewModel(string[] args)
         {
             brokenRules = new Dictionary<string, string>();
-            configFile = new ConfigFile("MaloobaLipSync");
+            var configFileName = "Settings";
+            if(args != null && args.Length != 0)
+                configFileName = args[0];
+            configFile = new ConfigFile("MaloobaLipSync", configFileName + ".txt");
             RestoreConfiguration();
         }
 

@@ -24,28 +24,13 @@ namespace MaloobaLipSync.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
-        /// <summary>
-        /// Initializes a new instance of the ViewModelLocator class.
-        /// </summary>
-        static ViewModelLocator()
-        {
-            //if(ViewModelBase.IsInDesignModeStatic)
-            //{
-            //    main = new MainViewModel();
-            //    configuration = new ConfigViewModel();
-            //}
-            //else
-            //{
-            //    main = new MainViewModel();
-            //    configuration = new v();
-            //}
-        }
-
         public IMainViewModel Main => main ?? (main = new MainViewModel());
 
         private static IMainViewModel main ;
 
-        public IConfigViewModel Configuration => configuration ?? (configuration = new ConfigViewModel());
+        public IConfigViewModel Configuration => configuration ?? (configuration = new ConfigViewModel(Args));
+        public static string[] Args { get; set; }
+
         private static IConfigViewModel configuration;
 
         public static void Cleanup()

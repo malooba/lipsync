@@ -12,6 +12,6 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <maloobaFingerprint:Indicator x:Name="AudioIndicator" Grid.Row="0" HorizontalAlignment="Center" Width="10" VerticalAlignment="Stretch" IsLit="{Binding Path=AudioIndicator}" />
-        <Label x:Name="IndexLabel" Grid.Row="1" Content="{Binding Index}" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Center" Margin="2" VerticalAlignment="Top" FontSize="10.667"/>
+        <Label Name="IndexLabel" Grid.Row="1" Content="{Binding Index}" Foreground="{StaticResource TextColourBrush}" HorizontalAlignment="Center" Margin="2" VerticalAlignment="Top" FontSize="10.667"/>
     </Grid>
 </UserControl>

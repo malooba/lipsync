@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -68,6 +69,16 @@ namespace MaloobaFingerprint.ViewModel
         /// </summary>
         public VideoMode VideoMode { get; set; }
 
+        public int SelectedTabIndex
+        {
+            get { return selectedTabIndex; }
+            set
+            {
+                selectedTabIndex = value;
+                Validate();
+            }
+        }
+
         /// <summary>
         /// True if settings are valid
         /// </summary>
@@ -90,16 +101,20 @@ namespace MaloobaFingerprint.ViewModel
         /// </summary>
         private ConfigFile configFile;
 
+        private int selectedTabIndex;
+
         /// <summary>
         /// Constructor
         /// </summary>
-        protected ConfigViewModelBase()
+        protected ConfigViewModelBase(string[] args)
         {
             brokenRules = new Dictionary<string, string>();
             InitVideoModes();
             InitTimecodeModes();
-            OkCommand = new RelayCommand<Window>(OkExecuted, OkCanExecute);
-            configFile = new ConfigFile("MaloobaFingerprint");
+            var configFileName = "Settings";
+            if(args != null && args.Length != 0)
+                configFileName = args[0];
+            configFile = new ConfigFile("MaloobaFingerprint", configFileName + ".txt");
         }
 
         /// <summary>
@@ -142,19 +157,9 @@ namespace MaloobaFingerprint.ViewModel
             brokenRules["Host"] = !IPAddress.TryParse(Host, out ip) ? "Invalid IP Address" : "";
             brokenRules["Port"] = !ushort.TryParse(Port, out p) ? "Invalid port number" : "";
 
-            return brokenRules.All(r => string.IsNullOrEmpty(r.Value));
+         return brokenRules.All(r => string.IsNullOrEmpty(r.Value));
         }
 
-        private void OkExecuted(Window w)
-        {
-            SaveConfiguration();
-            w.Close();
-        }
-
-        private bool OkCanExecute(Window w)
-        {
-            return Valid;
-        }
 
         /// <summary>
         /// Initialise the configuration timecode mode drop-down list collection

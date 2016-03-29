@@ -14,14 +14,12 @@ namespace MaloobaFingerprint.ViewModel
         TimecodeMode TimecodeMode { get; set; }
         ObservableCollection<VideoMode> VideoModes { get; }
         VideoMode VideoMode { get; set; }
+        int SelectedTabIndex { get; set; }
 
         void SaveConfiguration();
         void RestoreConfiguration();
 
-        /// <summary>
-        /// TODO:  Get rid of this?
-        /// </summary>
-        ICommand OkCommand { get; set; }
+        
         bool Valid { get; }
         string FirLength { get; }
     }
