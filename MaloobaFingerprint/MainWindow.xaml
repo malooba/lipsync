@@ -7,10 +7,12 @@
         xmlns:maloobaFingerprint="clr-namespace:MaloobaFingerprint"
         x:Class="MaloobaFingerprint.MainWindow" 
         mc:Ignorable="d" 
-        Title="MainWindow" 
-        Name="window" 
+        Title=""
+        Name="Window" 
         SizeToContent="Width" 
         Height="160" 
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
         Background="{StaticResource BackgroundBrush}"
         DataContext="{Binding Source={StaticResource Locator}}">
 
@@ -23,14 +25,14 @@
                 </VisualStateGroup.Transitions>
                 <VisualState Name="HideConfig">
                     <Storyboard>
-                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="window">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="Window">
                             <EasingDoubleKeyFrame KeyTime="0" Value="160" />
                         </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
                 <VisualState Name="ShowConfig">
                     <Storyboard>
-                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="window">
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="Window">
                             <EasingDoubleKeyFrame KeyTime="0" Value="300" />
                         </DoubleAnimationUsingKeyFrames>
                     </Storyboard>

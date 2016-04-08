@@ -39,6 +39,8 @@
 
 ; MUI end ------
 
+OutFile "LipSync.exe"
+
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 InstallDir "$PROGRAMFILES\Malooba Lip Sync"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
@@ -61,6 +63,7 @@ Section "Lip Sync" SEC01
   File "MaloobaLipSync\bin\Release\System.Reactive.PlatformServices.dll"
   File "MaloobaLipSync\bin\Release\System.Windows.Interactivity.dll"
   File "Confused\MaloobaLipSync\bin\Release\MaloobaLipSync.exe"
+  File "Malooba Lip Sync.pdf"
   CreateDirectory "$SMPROGRAMS\Malooba Lip Sync"
   CreateShortCut "$SMPROGRAMS\Malooba Lip Sync\MaloobaLipSync.lnk" "$INSTDIR\MaloobaLipSync.exe"
   CreateShortCut "$DESKTOP\MaloobaLipSync.lnk" "$INSTDIR\MaloobaLipSync.exe"
