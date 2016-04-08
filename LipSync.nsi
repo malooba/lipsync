@@ -39,7 +39,7 @@
 
 ; MUI end ------
 
-OutFile "LipSync.exe"
+#OutFile "LipSync.exe"
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 InstallDir "$PROGRAMFILES\Malooba Lip Sync"
