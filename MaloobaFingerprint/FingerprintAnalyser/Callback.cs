@@ -132,7 +132,17 @@ namespace MaloobaFingerprint.FingerprintAnalyser
         }
 
         /// <summary>
-        /// Generate a video fingerprint from the input YUV244 buffer
+        /// Generate a 15-bit video fingerprint from the input YUV244 buffer
+        /// This is currently unused but could be used to regenerate timecode on the destination video 
+        /// if this has been lost in the trancode process.  There are many other potential uses for this fingerprint data.
+        /// 
+        /// The algorithm divides the frame into 16 blocks (4x4) and applies the Hadamard masks to divide these blocks 
+        /// into two sets in 15 different and orthogonal ways.  The relative brightness of each pair of sets yields one
+        /// bit of the fingerprint.  The entire fingerprint is comprised of 15 bits; one from each Hadamard mask.
+        /// The whole algorithm is resilient to changes of resolution, aspect, brightness, contrast and gamma that might occur in the
+        /// transcode process.  It would be a simple matter to automatically detect letterboxing/pillarboxing and to only analyse the
+        /// active video area if this were required. 
+        /// Testing with transcoded broadcast video has shown the fingerprint to be robust and reliable.
         /// </summary>
         /// <param name="videoFrame"></param>
         /// <param name="sums"></param>

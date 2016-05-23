@@ -100,10 +100,11 @@ namespace MaloobaLipSync.Correlator
                 bool chPresentA;
                 bool chPresentB;
 
-                var corr = AudioCorrelator.Correlate(ch, a.Select(i => i.Item2).Skip(needleOffset), config.NeedleFrames, 
-                                                         a.Select(i => i.Item1), config.HaystackFrames, 
-                                                         out chPresentA, 
-                                                         out chPresentB);
+                var corr = AudioCorrelator.Correlate(ch, 
+                                                     a.Select(i => i.Item2).Skip(needleOffset), config.NeedleFrames, 
+                                                     a.Select(i => i.Item1), config.HaystackFrames, 
+                                                     out chPresentA, 
+                                                     out chPresentB);
                 shift.AudioPresentA[ch] = chPresentA;
                 shift.AudioPresentB[ch] = chPresentB;
                 if(corr == null)
