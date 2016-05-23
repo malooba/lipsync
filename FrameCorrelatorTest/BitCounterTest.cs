@@ -1,5 +1,4 @@
-﻿using System;
-using MaloobaLipSync.Correlator;
+﻿using MaloobaLipSync.Correlator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace FrameCorrelatorTest
