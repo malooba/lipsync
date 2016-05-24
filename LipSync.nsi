@@ -51,7 +51,7 @@
 
 ; MUI end ------
 
-#OutFile "LipSync.exe"
+OutFile "LipSync.exe"
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
 InstallDir "$PROGRAMFILES\Malooba Lip Sync"
@@ -74,7 +74,7 @@ Section "Lip Sync" SEC01
   File "MaloobaLipSync\bin\Release\System.Reactive.Linq.dll"
   File "MaloobaLipSync\bin\Release\System.Reactive.PlatformServices.dll"
   File "MaloobaLipSync\bin\Release\System.Windows.Interactivity.dll"
-  File "Confused\MaloobaLipSync\bin\Release\MaloobaLipSync.exe"
+  File "MaloobaLipSync\bin\Release\MaloobaLipSync.exe"
   File "Malooba Lip Sync.pdf"
   CreateDirectory "$SMPROGRAMS\Malooba Lip Sync"
   CreateShortCut "$SMPROGRAMS\Malooba Lip Sync\MaloobaLipSync.lnk" "$INSTDIR\MaloobaLipSync.exe"
@@ -91,7 +91,7 @@ Section "Fingerprint" SEC02
   File "MaloobaFingerprint\bin\Release\Microsoft.Practices.ServiceLocation.dll"
   File "MaloobaFingerprint\bin\Release\Newtonsoft.Json.dll"
   File "MaloobaFingerprint\bin\Release\System.Windows.Interactivity.dll"
-  File "Confused\MaloobaFingerprint\bin\Release\MaloobaFingerprint.exe"
+  File "MaloobaFingerprint\bin\Release\MaloobaFingerprint.exe"
   CreateDirectory "$SMPROGRAMS\MaloobaLipSync"
   CreateShortCut "$SMPROGRAMS\MaloobaLipSync\MaloobaFingerprint.lnk" "$INSTDIR\MaloobaFingerprint.exe"
   CreateShortCut "$DESKTOP\MaloobaFingerprint.lnk" "$INSTDIR\MaloobaFingerprint.exe"
